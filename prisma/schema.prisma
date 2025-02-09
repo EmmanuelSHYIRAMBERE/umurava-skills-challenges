@@ -9,6 +9,108 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  email        String      @unique
+  phone        String
+  password     String
+  verified     Boolean     @default(false)
+  role         UserRole    @default(user)
+  otp          String?
+  otpexpire    DateTime?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  settings     Settings[]
+  challenges   Challenge[] @relation(fields: [challengeIds], references: [id])
+  challengeIds String[]    @db.ObjectId
+}
+
+enum UserRole {
+  user
+  admin
+}
+
+model Challenge {
+  id                      String        @id @default(auto()) @map("_id") @db.ObjectId
+  title                   String
+  deadline                DateTime
+  duration                String
+  moneyPrize              Float
+  contactEmail            String
+  projectDescription      String?
+  projectBrief            String        @db.String
+  projectDescriptionTasks String        @db.String
+  tasks                   Json[] // Storing tasks as JSON since MongoDB supports it natively
+  skillsNeeded            String[]
+  seniority               Seniority
+  isOpen                  Boolean       @default(true)
+  status                  Status        @default(open)
+  type                    ChallengeType
+  keyInstructions         String
+  createdAt               DateTime      @default(now())
+  updatedAt               DateTime      @updatedAt
+  participants            User[]        @relation(fields: [participantIds], references: [id])
+  participantIds          String[]      @db.ObjectId
+  program                 Program?      @relation(fields: [programId], references: [id])
+  programId               String?       @db.ObjectId
+}
+
+enum Seniority {
+  Junior
+  Intermediate
+  Senior
+}
+
+enum Status {
+  open
+  completed
+}
+
+enum ChallengeType {
+  Challenge
+  Hackathon
+}
+
+model HelpCenter {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  content   String
+  category  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Program {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  type        ProgramType
+  challenges  Challenge[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+enum ProgramType {
+  Learning_Institution @map("Learning Institution")
+  Other
+}
+
+model Settings {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  theme     Theme    @default(light)
+  language  String   @default("en")
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Theme {
+  light
+  dark
 }
