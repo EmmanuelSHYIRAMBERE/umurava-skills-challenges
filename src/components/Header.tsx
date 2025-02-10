@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
+    const pathname = usePathname();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -27,30 +29,53 @@ const Header = () => {
           <div className="flex items-center">
             <div className="flex items-center gap-2">
               <Image
-                src="/assets/bluelogo.webp"
+                src="/assets/Official.png"
                 alt="Umurava Logo"
-                className="w-32 h-20"
-                width={32}
-                height={20}
+                className="w-32 h-20 object-contain"
+                width={128}
+                height={80}
               />
             </div>
           </div>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/" className="nav-link">
+            <Link
+              href="/"
+              className={`nav-link ${pathname === "/" ? "text-blue-600" : ""}`}
+            >
               Home
             </Link>
-            <Link href="/challenge" className="nav-link">
+            <Link
+              href="/challenge"
+              className={`nav-link ${
+                pathname === "/challenge" ? "text-blue-600" : ""
+              }`}
+            >
               Challenge & Hackthons
             </Link>
-            <Link href="/learning" className="nav-link">
+            <Link
+              href="/learning"
+              className={`nav-link ${
+                pathname === "/learning" ? "text-blue-600" : ""
+              }`}
+            >
               For Learning institutions
             </Link>
-            <Link href="/about-us" className="nav-link">
+            <Link
+              href="/about-us"
+              className={`nav-link ${
+                pathname === "/about-us" ? "text-blue-600" : ""
+              }`}
+            >
               About Us
             </Link>
-            <Link href="/contact-us" className="nav-link">
+            <Link
+              href="/contact-us"
+              className={`nav-link ${
+                pathname === "/contact-us" ? "text-blue-600" : ""
+              }`}
+            >
               Contact Us
             </Link>
           </nav>
