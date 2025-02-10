@@ -1,24 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userRole, setUserRole] = useState(null);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user")
-      ? JSON.parse(localStorage.getItem("user")!)
-      : null;
-
-    if (token && user) {
-      setIsLoggedIn(true);
-      setUserRole(user.role);
-    }
-  }, []);
+  const { data: session } = useSession();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white">
@@ -57,9 +44,9 @@ const Header = () => {
 
           {/* Join Button */}
           <div>
-            {isLoggedIn ? (
+            {session?.user ? (
               <Link
-                href={userRole === "admin" ? "/admin" : "/dashboard"}
+                href={session?.user.role === "admin" ? "/admin" : "/dashboard"}
                 className="bg-[#020B2D] text-white px-6 py-2 rounded-md hover:bg-blue-900 transition-colors duration-200"
               >
                 Dashboard
