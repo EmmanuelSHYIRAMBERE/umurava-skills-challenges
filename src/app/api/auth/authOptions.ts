@@ -10,7 +10,9 @@ interface Credentials {
 
 const prisma = new PrismaClient();
 
-const login = async (credentials: Credentials) => {};
+const login = async (credentials: Credentials) => {
+  console.log("credentials", credentials);
+};
 
 const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -32,9 +34,6 @@ const authOptions: AuthOptions = {
             throw new Error("Please provide credentials.");
           }
           const user = await login(credentials);
-          if (!user) {
-            return null;
-          }
           return user;
         } catch (error: any) {
           console.error("Authorization error:", error);
@@ -49,19 +48,14 @@ const authOptions: AuthOptions = {
     maxAge: Number(process.env.NEXT_AUTH_TIMEOUT || 3600),
   },
   callbacks: {
-    async jwt({ token, user, trigger, session }) {
+    async jwt({ token, trigger, session }) {
       if (trigger === "update") {
         return { ...token, ...session.user };
       }
 
-      if (user) {
-      }
-
       return token;
     },
-    async session({ session, token }) {
-      if (token) {
-      }
+    async session({ session }) {
       return session;
     },
     async redirect({ url, baseUrl }) {
@@ -85,13 +79,13 @@ const authOptions: AuthOptions = {
   },
   events: {
     async signIn(message) {
-      console.log("Sign in event");
+      console.log("Sign in event", message);
     },
     async signOut(message) {
-      console.log("Sign out event");
+      console.log("Sign out event", message);
     },
     async createUser(message) {
-      console.log("User created");
+      console.log("User created", message);
     },
   },
 };
