@@ -1,6 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import "../globals.css";
+import ClientRootLayout from "../ClientRootLayout";
 
 export const metadata: Metadata = {
   title: "",
@@ -14,7 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ClientRootLayout>{children}</ClientRootLayout>
+      </body>
     </html>
   );
 }

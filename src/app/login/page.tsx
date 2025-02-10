@@ -1,14 +1,15 @@
+import Login from "@/components/Login";
 import { Metadata } from "next";
 
-const page = () => {
-  return <div>page</div>;
+const LoginPage = () => {
+  return <Login />;
 };
 
-export default page;
+export default LoginPage;
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "",
-  description: "",
+  title: "LOGIN - UMURAVA",
+  description: "Enter your credentials to enter your dashboard",
 };
