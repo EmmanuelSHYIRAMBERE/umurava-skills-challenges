@@ -25,42 +25,19 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link
-              href="/"
-              className={`nav-link ${pathname === "/" ? "text-blue-600" : ""}`}
-            >
+            <Link href="/" className="nav-link">
               Home
             </Link>
-            <Link
-              href="/challenge"
-              className={`nav-link ${
-                pathname === "/challenge" ? "text-blue-600" : ""
-              }`}
-            >
+            <Link href="/challenge" className="nav-link">
               Challenge & Hackthons
             </Link>
-            <Link
-              href="/learning"
-              className={`nav-link ${
-                pathname === "/learning" ? "text-blue-600" : ""
-              }`}
-            >
+            <Link href="/learning" className="nav-link">
               For Learning institutions
             </Link>
-            <Link
-              href="/about-us"
-              className={`nav-link ${
-                pathname === "/about-us" ? "text-blue-600" : ""
-              }`}
-            >
+            <Link href="/about-us" className="nav-link">
               About Us
             </Link>
-            <Link
-              href="/contact-us"
-              className={`nav-link ${
-                pathname === "/contact-us" ? "text-blue-600" : ""
-              }`}
-            >
+            <Link href="/contact-us" className="nav-link">
               Contact Us
             </Link>
           </nav>
