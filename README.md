@@ -110,10 +110,9 @@ cp .env.example .env
 # Update .env with your configuration
 ```
 
-4. Install Frontend Dependencies
+4. Install Dependencies
 
 ```bash
-cd ../frontend
 npm install
 ```
 
