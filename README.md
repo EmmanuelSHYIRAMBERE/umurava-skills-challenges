@@ -76,6 +76,7 @@
 - Node.js
 - TypeScript
 - MongoDB
+- Prisma
 - JWT Authentication
 - Nodemailer
 
