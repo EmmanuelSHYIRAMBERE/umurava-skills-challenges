@@ -1,8 +1,15 @@
-"use client"
-import { Metadata } from "next";
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaFacebookF, FaGooglePlusG, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+"use client";
 
+import React, { useState, ChangeEvent, FormEvent } from "react";
+import {
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaFacebookF,
+  FaGooglePlusG,
+  FaLinkedinIn,
+  FaYoutube,
+} from "react-icons/fa";
 
 interface FormData {
   name: string;
@@ -11,32 +18,29 @@ interface FormData {
   message: string;
 }
 
+const Page = () => {
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    title: "",
+    message: "",
+  });
 
- 
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-const page = () => {
-   const [formData, setFormData] = useState<FormData>({
-     name: "",
-     email: "",
-     title: "",
-     message: "",
-   });
-
-   const handleChange = (
-     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-   ) => {
-     const { name, value } = e.target;
-     setFormData({
-       ...formData,
-       [name]: value,
-     });
-   };
-
-   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-     e.preventDefault();
-     // Handle form submission logic here
-     console.log("Form submitted:", formData);
-   };
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log("Form submitted:", formData);
+  };
   return (
     <div className="flex flex-col md:flex-row items-center justify-center min-h-screen max-w-5xl mx-auto px-8">
       <div className="w-full md:w-1/2 p-8">
@@ -174,7 +178,6 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
 
 export const dynamic = "force-dynamic";
-

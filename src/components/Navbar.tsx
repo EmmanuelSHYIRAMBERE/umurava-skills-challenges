@@ -9,7 +9,7 @@ import {
   FaRegBell,
 } from "react-icons/fa";
 import axios from "axios";
-import Image from "next/image";
+// import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -19,11 +19,11 @@ const Navbar = () => {
   const notificationRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const user = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user")!)
-    : null;
+  // const user = localStorage.getItem("user")
+  //   ? JSON.parse(localStorage.getItem("user")!)
+  //   : null;
 
-  const isAdmin = user && user.role === "admin";
+  // const isAdmin = user && user.role === "admin";
 
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
@@ -174,7 +174,7 @@ const Navbar = () => {
             className="text-gray-500 hover:text-gray-700 cursor-pointer text-2xl flex items-center justify-center"
             onClick={toggleProfileDropdown}
           >
-            {user && user.photo ? (
+            {/* {user && user.photo ? (
               <Image
                 src={user.photo}
                 alt={user.name}
@@ -182,11 +182,11 @@ const Navbar = () => {
                 width={8}
                 height={8}
               />
-            ) : (
+            ) : ( */}
               <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
-                {user ? user.name.charAt(0).toUpperCase() : "U"}
+                {/* {user ? user.name.charAt(0).toUpperCase() : "U"} */}{"U"}
               </div>
-            )}
+            {/* )} */}
           </div>
           {showProfileDropdown && (
             <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-200 rounded-lg shadow-xl transform transition-all duration-200 ease-out">
@@ -195,7 +195,7 @@ const Navbar = () => {
                 <div className="px-3 py-2 mb-2">
                   <div className="flex items-center space-x-3 pb-3 border-b border-gray-100">
                     <div className="bg-blue-100 p-2 rounded-full">
-                      {user && user.photo ? (
+                      {/* {user && user.photo ? (
                         <img
                           src={user.photo}
                           alt={user.name}
@@ -205,14 +205,14 @@ const Navbar = () => {
                         <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
                           {user ? user.name.charAt(0).toUpperCase() : "U"}
                         </div>
-                      )}
+                      )} */}
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800">
-                        {user ? user.name : "User"}
+                        {/* {user ? user.name : "User"} */}
                       </h4>
                       <p className="text-sm text-gray-500">
-                        {user ? user.email : "user@example.com"}
+                        {/* {user ? user.email : "user@example.com"} */}
                       </p>
                     </div>
                   </div>
@@ -220,7 +220,7 @@ const Navbar = () => {
                 {/* Navigation Links */}
                 <div className="space-y-1">
                   <Link
-                    href={isAdmin ? "/admin/settings" : "/dashboard/settings"}
+                    href={"/dashboard/settings"}
                     className="flex items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-md transition-colors duration-150 group"
                   >
                     <FaUserCircle className="mr-3 text-gray-400 group-hover:text-blue-500" />
@@ -228,7 +228,7 @@ const Navbar = () => {
                   </Link>
 
                   <Link
-                    href={isAdmin ? "/admin/settings" : "/dashboard/settings"}
+                    href={"/admin/settings"}
                     className="flex items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-md transition-colors duration-150 group"
                   >
                     <FaCog className="mr-3 text-gray-400 group-hover:text-blue-500" />
