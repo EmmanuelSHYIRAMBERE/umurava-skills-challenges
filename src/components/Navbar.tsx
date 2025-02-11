@@ -184,7 +184,7 @@ const Navbar = () => {
               />
             ) : (
               <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
-                {user ? user.name.charAt(0).toUpperCase() : "U"}
+                {/* {user ? user.name.charAt(0).toUpperCase() : "U"} */}{"U"}
               </div>
             )}
           </div>

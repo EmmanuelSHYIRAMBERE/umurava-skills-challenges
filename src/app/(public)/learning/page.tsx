@@ -7,19 +7,19 @@ import {
   FaUserTie,
   FaClipboardList,
 } from "react-icons/fa";
-import students from "../../../public/assets/student.png";
-import skills from "../../../public/assets/skill section banner 2.png";
-import tori from "../../../public/assets/logo/Tori 1.png";
-import google from "../../../public/assets/logo/Gdg_Kigali 1.png";
-import education from "../../../public/assets/logo/EducationCollaborative 1.png";
-import keppler from "../../../public/assets/logo/KeplerLogo 1.png";
-import hill from "../../../public/assets/logo/HiiL_Logo 1.png";
-import cib from "../../../public/assets/logo/CIBA 1.png";
-import ared from "../../../public/assets/logo/Ared 1.png";
-import igihe from "../../../public/assets/logo/IGIHE_LOGO 1.png";
-import viamo from "../../../public/assets/logo/EducationCollaborative 2.png";
-import laterite from "../../../public/assets/logo/HiiL_Logo 2.png";
-import sokofund from "../../../public/assets/logo/SokoFund 1.png";
+import students from "../../../../public/assets/student.png";
+import skills from "../../../../public/assets/skill section banner 2.png";
+import tori from "../../../../public/assets/logo/Tori 1.png";
+import google from "../../../../public/assets/logo/Gdg_Kigali 1.png";
+import education from "../../../../public/assets/logo/EducationCollaborative 1.png";
+import keppler from "../../../../public/assets/logo/KeplerLogo 1.png";
+import hill from "../../../../public/assets/logo/HiiL_Logo 1.png";
+import cib from "../../../../public/assets/logo/CIBA 1.png";
+import ared from "../../../../public/assets/logo/Ared 1.png";
+import igihe from "../../../../public/assets/logo/IGIHE_LOGO 1.png";
+import viamo from "../../../../public/assets/logo/EducationCollaborative 2.png";
+import laterite from "../../../../public/assets/logo/HiiL_Logo 2.png";
+import sokofund from "../../../../public/assets/logo/SokoFund 1.png";
 
 const partners = [
   tori,
@@ -228,7 +228,7 @@ const page = () => {
                   Ready to transform your learning institution?
                 </h1>
                 <button className="px-20 py-3 text-lg font-semibold text-blue-500 bg-white rounded-lg shadow-md hover:bg-gray-100">
-                  Let's Partner
+                  Let&apos;s Partner
                 </button>
               </div>
             </div>

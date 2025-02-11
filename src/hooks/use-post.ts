@@ -1,6 +1,6 @@
 import axios from "axios";
 import useSWRMutation from "swr/mutation";
-import { SERVER_BASE_URL } from "@/constansts/constants";
+
 
 // Function to handle data addition (POST)
 const addData = async (
@@ -24,7 +24,7 @@ const addData = async (
 
 // Custom hook for adding data
 const usePost = (path: string) => {
-  const url = `${SERVER_BASE_URL}${path}`;
+  const url = `${path}`;
   const { trigger, isMutating, data, error } = useSWRMutation(url, addData);
 
   return {
