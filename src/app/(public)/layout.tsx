@@ -1,8 +1,7 @@
 // app/(public)/layout.tsx
-
+import ClientRootLayout from "@/app/ClientRootLayout";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-
 
 export default function PublicLayout({
   children,
@@ -10,10 +9,14 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <Header />
-      <main className="flex-grow pt-16 max-w-6xl mx-auto">{children}</main>
-      <Footer />
-    </>
+    <html lang="en">
+      <body>
+        <ClientRootLayout>
+          <Header />
+          <main className="flex-grow pt-16 max-w-6xl mx-auto">{children}</main>
+          <Footer />
+        </ClientRootLayout>
+      </body>
+    </html>
   );
 }
