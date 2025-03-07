@@ -1,7 +1,6 @@
 import axios from "axios";
 import useSWRMutation from "swr/mutation";
 
-
 // Function to handle data addition (POST)
 const addData = async (
   url: string,
@@ -17,7 +16,7 @@ const addData = async (
 
     return response.data;
   } catch (error) {
-    console.error("Error adding data:", error);
+    console.log("Error adding data:", error);
     throw new Error("Failed to add data");
   }
 };

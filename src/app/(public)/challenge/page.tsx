@@ -1,4 +1,4 @@
-"use clients"
+"use clients";
 
 import React from "react";
 // import { Button } from "@/components/ui/button";
@@ -21,7 +21,7 @@ export default function Page() {
   //     const token = localStorage.getItem("token");
   //     try {
   //       const response = await axios.get(
-  //         `${SERVER_BASE_URL}/api/v1/challenges`,
+  //         `${SERVER_BASE_URL}/api/challenges`,
   //         {
   //           headers: {
   //             "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export default function Page() {
   //       );
   //       setChallenges(response.data.challenges);
   //     } catch (error) {
-  //       console.error("Error fetching challenges:", error);
+  //       console.log("Error fetching challenges:", error);
   //       setError("Failed to fetch challenges. Please try again later.");
   //     } finally {
   //       setIsLoading(false);

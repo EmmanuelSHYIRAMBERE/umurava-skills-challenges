@@ -5,6 +5,7 @@ import { User } from "@/types/user";
 
 export class UserService {
   private async sendWelcomeEmail(user: User): Promise<void> {
+    console.log("Welcome email", user);
     try {
       const config = {
         service: "gmail",
@@ -116,12 +117,13 @@ export class UserService {
       // Send email
       await transporter.sendMail(message);
     } catch (error) {
-      console.error("Error sending welcome email:", error);
+      console.log("Error sending welcome email:", error);
       throw new Error("Failed to send challenge email");
     }
   }
 
   private async sendVerificationEmail(user: User): Promise<void> {
+    console.log("Verification email", user);
     try {
       // Generate OTP
       const otp = crypto.randomInt(100000, 999999).toString();
@@ -242,13 +244,23 @@ export class UserService {
 
       // Send email
       await transporter.sendMail(message);
+
+      // Save token in the database
+      // await prisma.verificationToken.create({
+      //   data: {
+      //     email: user.email,
+      //     token: otp,
+      //     expires: otpExpiry,
+      //   },
+      // });
     } catch (error) {
-      console.error("Error sending verification email:", error);
+      console.log("Error sending verification email:", error);
       throw new Error("Failed to send verification email");
     }
   }
 
   public async createUser(userData: User) {
+    console.log("userData", userData);
     const existingUser = await prisma.user.findUnique({
       where: { email: userData.email },
     });
