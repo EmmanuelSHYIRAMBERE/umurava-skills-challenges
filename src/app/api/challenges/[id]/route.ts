@@ -26,11 +26,9 @@ export async function GET(
 
     return NextResponse.json({ challenge }, { status: 200 });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
   }
 }
 
@@ -68,11 +66,9 @@ export async function PUT(
 
     return NextResponse.json({ challenge: updatedChallenge }, { status: 200 });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
   }
 }
 
@@ -100,10 +96,8 @@ export async function DELETE(
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
   }
 }

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { FaHome, FaUserPlus, FaRegFileAlt } from "react-icons/fa";
 import log from "../../public/assets/log.svg";
@@ -18,49 +18,49 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const Sidebar = () => {
- const router = useRouter();
- const [showConfirmation, setShowConfirmation] = useState(false);
- const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
- const user =
-   typeof window !== "undefined" && localStorage.getItem("user")
-     ? JSON.parse(localStorage.getItem("user")!)
-     : null;
- const isAdmin = user && user.role === "admin";
+  const user =
+    typeof window !== "undefined" && localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user")!)
+      : null;
+  const isAdmin = user && user.role === "admin";
 
- const isActive = (path: string) => {
-   return router.pathname === path ? "bg-white text-blue-500" : "";
- };
+  const isActive = (path: string) => {
+    return router.pathname === path ? "bg-white text-blue-500" : "";
+  };
 
- const handleLogout = async () => {
-   setIsLoading(true);
-   try {
-     const response = await axios.post(`api/auth/logout`);
+  const handleLogout = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(`api/auth/logout`);
 
-     if (response.status === 200) {
-       localStorage.clear();
-       router.push("/"); // Redirect to the login page
-       toast.success("Logout successful!");
-     } else {
-       console.error("Logout failed");
-       toast.error("Logout failed. Please try again.");
-     }
-   } catch (error) {
-     console.error("Error during logout:", error);
-     toast.error("Error during logout. Please try again.");
-   } finally {
-     setIsLoading(false);
-     setShowConfirmation(false);
-   }
- };
+      if (response.status === 200) {
+        localStorage.clear();
+        router.push("/"); // Redirect to the login page
+        toast.success("Logout successful!");
+      } else {
+        console.log("Logout failed");
+        toast.error("Logout failed. Please try again.");
+      }
+    } catch (error) {
+      console.log("Error during logout:", error);
+      toast.error("Error during logout. Please try again.");
+    } finally {
+      setIsLoading(false);
+      setShowConfirmation(false);
+    }
+  };
 
- const confirmLogout = () => {
-   setShowConfirmation(true);
- };
+  const confirmLogout = () => {
+    setShowConfirmation(true);
+  };
 
- const cancelLogout = () => {
-   setShowConfirmation(false);
- };
+  const cancelLogout = () => {
+    setShowConfirmation(false);
+  };
   return (
     <>
       <div className="fixed bg-blue-500 text-white h-screen w-72 p-6 flex flex-col justify-between">
@@ -100,7 +100,9 @@ const Sidebar = () => {
                   Challenges & Hackathons
                 </li>
               </Link>
-              <Link href={isAdmin ? "/admin/community" : "/dashboard/community"}>
+              <Link
+                href={isAdmin ? "/admin/community" : "/dashboard/community"}
+              >
                 <li
                   className={`flex items-center p-2 rounded-md hover:bg-white hover:text-blue-500 ${isActive(
                     isAdmin ? "/admin/community" : "/dashboard/community"
@@ -124,7 +126,9 @@ const Sidebar = () => {
               Settings
             </div>
           </Link>
-          <Link href={isAdmin ? "/admin/help-center" : "/dashboard/help-center"}>
+          <Link
+            href={isAdmin ? "/admin/help-center" : "/dashboard/help-center"}
+          >
             <div
               className={`flex items-center p-2 rounded-md hover:bg-white hover:text-blue-500 ${isActive(
                 isAdmin ? "/admin/help-center" : "/dashboard/help-center"

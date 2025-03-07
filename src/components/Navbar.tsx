@@ -68,10 +68,10 @@ const Navbar = () => {
         localStorage.clear();
         router.push("/login"); // Redirect to the login page or any other appropriate page
       } else {
-        console.error("Logout failed");
+        console.log("Logout failed");
       }
     } catch (error) {
-      console.error("Error during logout:", error);
+      console.log("Error during logout:", error);
     }
   };
   return (
@@ -183,9 +183,10 @@ const Navbar = () => {
                 height={8}
               />
             ) : ( */}
-              <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
-                {/* {user ? user.name.charAt(0).toUpperCase() : "U"} */}{"U"}
-              </div>
+            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
+              {/* {user ? user.name.charAt(0).toUpperCase() : "U"} */}
+              {"U"}
+            </div>
             {/* )} */}
           </div>
           {showProfileDropdown && (

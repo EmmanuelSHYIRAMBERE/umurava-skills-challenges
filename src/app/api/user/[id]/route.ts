@@ -23,11 +23,9 @@ export async function GET(
 
     return NextResponse.json({ user }, { status: 200 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
   }
 }
 
@@ -62,11 +60,9 @@ export async function PUT(
 
     return NextResponse.json({ user: updatedUser }, { status: 200 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
   }
 }
 
@@ -90,10 +86,8 @@ export async function DELETE(
       { status: 200 }
     );
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
   }
 }

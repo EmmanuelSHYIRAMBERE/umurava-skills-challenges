@@ -43,7 +43,7 @@ const login = async (credentials: Credentials) => {
 
     return user;
   } catch (error) {
-    console.error("Login error:", error);
+    console.log("Login error:", error);
     throw error;
   }
 };
@@ -84,7 +84,7 @@ const authOptions: AuthOptions = {
           const user = await login(credentials);
           return user;
         } catch (error) {
-          console.error("Authorization error:", error);
+          console.log("Authorization error:", error);
           throw new Error("Authentication failed");
         }
       },
@@ -138,7 +138,7 @@ const authOptions: AuthOptions = {
   },
   logger: {
     error(code, metadata) {
-      console.error(`NextAuth Error: ${code}`, metadata);
+      console.log(`NextAuth Error: ${code}`, metadata);
     },
     warn(code) {
       console.warn(`NextAuth Warning: ${code}`);

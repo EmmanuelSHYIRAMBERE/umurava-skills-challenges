@@ -33,11 +33,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ challenge }, { status: 201 });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
   }
 }
 
@@ -51,10 +49,8 @@ export async function GET(request: NextRequest) {
     const challenges = await challengeService.getAllChallenges();
     return NextResponse.json({ challenges }, { status: 200 });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
   }
 }

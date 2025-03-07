@@ -14,10 +14,8 @@ export async function GET(request: NextRequest) {
     const challenges = await challengeService.getOpenChallenges();
     return NextResponse.json({ challenges }, { status: 200 });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
   }
 }

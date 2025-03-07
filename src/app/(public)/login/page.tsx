@@ -154,11 +154,22 @@ const Page: React.FC = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        isSignUp ? `/api/v1/user` : `/api/v1/auth/login`,
+        isSignUp ? `/api/user` : `/api/auth/login`,
         apiData
       );
       toast.success("Success!");
       console.log("response", response);
+
+      // Store user data in local storage for later use valid for 1 day
+      localStorage.setItem(
+        "userFullName",
+        formData.name || response.data.user.name
+      );
+      localStorage.setItem(
+        "userEmail",
+        formData.email || response.data.user.email
+      );
+
       // Store user data and token in local storage
       localStorage.setItem("user", JSON.stringify(response.data.user));
       localStorage.setItem("token", response.data.access_token);

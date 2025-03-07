@@ -9,6 +9,7 @@ const userService = new UserService();
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    console.log("body", body);
     const validation = userSchema.safeParse(body);
 
     if (!validation.success) {
@@ -39,14 +40,11 @@ export async function POST(request: NextRequest) {
 
     return response;
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
   }
 }
-
 export async function GET(request: NextRequest) {
   try {
     const token = await getToken({ req: request });
@@ -57,10 +55,8 @@ export async function GET(request: NextRequest) {
     const users = await userService.getAllUsers();
     return NextResponse.json({ users }, { status: 200 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    }
   }
 }

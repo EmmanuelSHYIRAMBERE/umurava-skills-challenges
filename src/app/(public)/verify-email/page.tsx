@@ -11,13 +11,12 @@ import { useToast } from "@/hooks/use-toast";
 import { IUser } from "@/types";
 import OTPInput from "@/components/OTPInput";
 
-
 const Page = () => {
   const router = useRouter();
   const { toast } = useToast();
   const [otp, setOtp] = React.useState("");
   const [isResending, setIsResending] = React.useState(false);
-  const { add, isAdding } = usePost("/api/v1/auth/verifyEmail");
+  const { add, isAdding } = usePost("/api/otp-verification");
 
   // Check for user data on component mount
   React.useEffect(() => {
@@ -33,6 +32,7 @@ const Page = () => {
   }, [router]);
 
   // Get user data for rendering
+  const userEmail = localStorage.getItem("userEmail");
   const getUserData = () => {
     if (typeof window === "undefined") return null;
     const userString = localStorage.getItem("user");
@@ -48,16 +48,8 @@ const Page = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!userData) {
-      toast({
-        title: "Error",
-        description: "User data is missing. Please log in again.",
-      });
-      router.push("/login");
-      return;
-    }
     try {
-      await add({ email: userData.email, otp });
+      await add({ otp });
 
       toast({
         title: "Success",
@@ -77,7 +69,7 @@ const Page = () => {
   const handleResendEmail = async () => {
     setIsResending(true);
 
-    if (!userData) {
+    if (!userData && userEmail) {
       toast({
         title: "Error",
         description: "User data is missing. Please log in again.",
@@ -87,10 +79,10 @@ const Page = () => {
     }
 
     try {
-      const response = await fetch(`/api/v1/user/resendToken`, {
+      const response = await fetch(`/api/user/resendToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: userData.email }),
+        body: JSON.stringify({ email: userData.email || userEmail }),
       });
 
       // Check if response has content before trying to parse JSON
@@ -117,7 +109,7 @@ const Page = () => {
       });
       setOtp("");
     } catch (err) {
-      console.error("Error resending email", err);
+      console.log("Error resending email", err);
       toast({
         title: "Error",
         description:
